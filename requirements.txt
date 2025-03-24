@@ -1,0 +1,4 @@
+reportlab
+Pillow
+requests
+beautifulsoup4  # needed for enrich_metadata.py
