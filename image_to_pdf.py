@@ -9,6 +9,10 @@ from reportlab.pdfbase.ttfonts import TTFont
 from PIL import Image
 
 
+from video_to_images import extract_images_from_video
+from create_archive import ARCHIVE_VERSION
+
+
 def load_titles(csv_path):
     titles = {}
     with open(csv_path, 'r', encoding='utf-8') as f:
@@ -129,7 +133,7 @@ def draw_description(c, titles, day_num, pixel_counts, x_pos, page_width, first_
 def draw_mosaic(c, x_pos, page_height, image_files, input_directory):
     c.setFont("OpenSans-Regular", 12)
     c.drawString(x_pos + 10, page_height - 180, "Top 100 colors (by pixel count):")
-    c.drawString(381, page_height - 180, f"Archive version: 0.1.0")
+    c.drawString(381, page_height - 180, f"Archive version: {ARCHIVE_VERSION}")
 
     color_dict = defaultdict(int)
     for i, image_file in enumerate(image_files, 1):  # Process each image
@@ -172,19 +176,63 @@ def create_canvas(output_pdf, size=A4):
     return c, x_pos, scaled_width
 
 
-def create_pdf_from_images(input_directory, pdf_dir, titles, image_files, size=A4, batch=100):
+def draw_video_footer_lines(c, page_width, day_num):
+    draw_footer_line(c, 40, page_width, "Artwork generated collaboratively at  ", f"https://basepaint.xyz/canvas/{day_num}")
+    draw_footer_line(c, 40 - 15, page_width, "Archive available at  ", "https://github.com/isaacbernat/basepaint")
+
+
+def create_video_page(c, script_dir, page_width, page_height, image_file, scaled_width, x_pos, video_image_path, titles):
+    day_num = image_file[:-4]
+    title_data = titles.get(int(day_num), {'title': '', 'palette': []})
+    title_data['title'] = title_data.get('title', '') + f" (WIP)"
+    title_data['palette'] = []
+
+    video_file = os.path.join(os.path.join(script_dir, "videos"),  day_num + ".mp4")
+    extract_images_from_video(video_file)
+    video_image_files = sorted([f for f in os.listdir(video_image_path) if f.endswith('.jpg') and f.startswith(day_num)])
+
+    frame_width = scaled_width / 3  # 3 columns
+    frame_height = frame_width  # square
+    max_frames_per_row = int(page_width / frame_width)  # calculate how many frames can fit in a row
+    page_frame_count = 0
+    gap = 10  # whitespace between images
+
+    draw_header(c, int(day_num), {int(day_num): title_data}, x_pos, page_height, page_width)
+    for video_image_file in video_image_files:            
+        video_image_frame_path = os.path.join(video_image_path, video_image_file)
+        frame_x = (page_frame_count % max_frames_per_row) * (frame_width + gap) + x_pos  # position horizontally
+        frame_y = page_height - (page_frame_count // max_frames_per_row + 1) * (frame_height + gap) - 70  # position vertically
+        c.drawImage(video_image_frame_path,
+                frame_x,
+                frame_y,
+                width=frame_width, 
+                height=frame_height)
+        page_frame_count += 1
+    c.showPage()
+
+
+def create_pdf_from_images(script_dir, titles, size=A4, batch=100, include_video=False):
+    image_dir = os.path.join(script_dir, "images")
+    image_files = sorted([f for f in os.listdir(image_dir) if f.endswith('.jpg')])
+    pdf_dir = os.path.join(script_dir, "pdf")
+    os.makedirs(pdf_dir, exist_ok=True)  # Create pdf directory if needed
+
     page_width, page_height = size
     for page_num, image_file in enumerate(image_files, 1):  # Process each image
         if page_num % batch == 1:
-            output_pdf = os.path.join(pdf_dir, f"basepaint_archive_{page_num}_to_{page_num+99}.pdf")
+            output_pdf = os.path.join(pdf_dir, f"basepaint_archive_{page_num}_to_{page_num+batch-1}.pdf")
+            if os.path.exists(output_pdf):
+                print(f"Skipping {output_pdf} as it already exists")
             c, x_pos, scaled_width = create_canvas(output_pdf)
+        if os.path.exists(output_pdf):
+            continue
 
         day_num = int(image_file.split('.')[0])  # Extract day number (assuming XXXX.jpg)
         if page_num % 10 == 0:
             print(f"Processing image {day_num}/{len(image_files)}")
 
         draw_header(c, day_num, titles, x_pos, page_height, page_width)
-        image_path = os.path.join(input_directory, image_file)
+        image_path = os.path.join(image_dir, image_file)
         c.drawImage(image_path,
                    x_pos,  # center horizontally
                    page_height - scaled_width - 70,  # position below header
@@ -195,16 +243,20 @@ def create_pdf_from_images(input_directory, pdf_dir, titles, image_files, size=A
             draw_description(c, titles, day_num, pixel_counts, x_pos, page_width, first_line_y=(page_height - scaled_width - 90))
         except Exception as e:
             print(f"Error processing image {day_num}: {e}")
-        draw_footer_line(c, 40, page_width, "Artwork generated collaboratively at  ", f"https://basepaint.xyz/canvas/{day_num}")
-        draw_footer_line(c, 40 - 15, page_width, "Archive available at  ", "https://github.com/isaacbernat/basepaint")
+        draw_video_footer_lines(c, page_width, day_num)
         c.showPage()
-        if page_num % 100 == 0:
+        if include_video:
+            create_video_page(c, script_dir, page_width, page_height, image_file, scaled_width, x_pos, os.path.join(script_dir, "video_images"), titles)
+
+        if page_num % batch == 0:
             c.save()
             print(f"saved {output_pdf}")
 
 
-def create_cover(input_directory, pdf_dir, size, image_files):
+def create_cover(script_dir, size, image_files):
     print("Creating PDF cover...")
+    img_dir = os.path.join(script_dir, "images")
+    pdf_dir = os.path.join(script_dir, "pdf")
     output_pdf = os.path.join(pdf_dir, "basepaint_archive_000_cover.pdf")
     page_width, page_height = size
     c, x_pos, _ = create_canvas(output_pdf)
@@ -218,7 +270,7 @@ def create_cover(input_directory, pdf_dir, size, image_files):
     c.drawString(x_pos + 10, page_height - 105, subtitle)
     c.drawString(349, page_height - 105, f"From day #1 to #{len(image_files)}")
 
-    draw_mosaic(c, x_pos, page_height, image_files, input_directory)
+    draw_mosaic(c, x_pos, page_height, image_files, img_dir)
     draw_footer_line(c, 40, page_width, "Artwork generated collaboratively at  ", f"https://basepaint.xyz")
     draw_footer_line(c, 40 - 15, page_width, "Archive available at  ", "https://github.com/isaacbernat/basepaint")
 
@@ -226,21 +278,17 @@ def create_cover(input_directory, pdf_dir, size, image_files):
     c.save()
 
 
-def create_pdf(batch_size=100, add_cover=True):
+def create_pdf(batch_size=100, add_cover=True, include_video=False):
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    img_dir = os.path.join(script_dir, "images")
-    pdf_dir = os.path.join(script_dir, "pdf")
-    os.makedirs(pdf_dir, exist_ok=True)  # Create pdf directory if needed
     titles = load_titles('metadata.csv')
-    image_files = sorted([f for f in os.listdir(img_dir) if f.endswith('.jpg')])
-    size=A4
     load_fonts()
-    create_pdf_from_images(img_dir, pdf_dir, titles, image_files, size=size, batch=batch_size)
+    create_pdf_from_images(script_dir, titles, size=A4, batch=batch_size, include_video=include_video)
     if add_cover:
+        img_dir = os.path.join(script_dir, "images")
+        image_files = sorted([f for f in os.listdir(img_dir) if f.endswith('.jpg')])
         create_cover(
-            input_directory=img_dir,
-            pdf_dir=pdf_dir,
-            size=size,
+            script_dir=script_dir,
+            size=A4,
             image_files=image_files,
         )
     print("Finish creating PDF.")
