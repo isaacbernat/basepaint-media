@@ -10,7 +10,7 @@ from PIL import Image
 
 
 from video_to_images import extract_images_from_video
-from create_archive import ARCHIVE_VERSION
+from config import ARCHIVE_VERSION
 
 
 def load_titles(csv_path):
@@ -211,6 +211,23 @@ def create_video_page(c, script_dir, page_width, page_height, image_file, scaled
     c.showPage()
 
 
+def create_image_page(c, page_width, page_height, image_file, scaled_width, x_pos, titles, day_num, image_dir):
+    draw_header(c, day_num, titles, x_pos, page_height, page_width)
+    image_path = os.path.join(image_dir, image_file)
+    c.drawImage(image_path,
+                x_pos,  # center horizontally
+                page_height - scaled_width - 70,  # position below header
+                width=scaled_width, 
+                height=scaled_width)
+    try:
+        pixel_counts = count_pixels(image_path, titles.get(day_num, {}).get('palette', []))
+        draw_description(c, titles, day_num, pixel_counts, x_pos, page_width, first_line_y=(page_height - scaled_width - 90))
+    except Exception as e:
+        print(f"Error processing image {day_num}: {e}")
+    draw_video_footer_lines(c, page_width, day_num)
+    c.showPage()
+
+
 def create_pdf_from_images(script_dir, titles, size=A4, batch=100, include_video=False):
     image_dir = os.path.join(script_dir, "images")
     image_files = sorted([f for f in os.listdir(image_dir) if f.endswith('.jpg')])
@@ -220,7 +237,7 @@ def create_pdf_from_images(script_dir, titles, size=A4, batch=100, include_video
     page_width, page_height = size
     for page_num, image_file in enumerate(image_files, 1):  # Process each image
         if page_num % batch == 1:
-            output_pdf = os.path.join(pdf_dir, f"basepaint_archive_{page_num}_to_{page_num+batch-1}.pdf")
+            output_pdf = os.path.join(pdf_dir, f"basepaint_archive_{page_num:04d}_to_{page_num+batch-1:04d}.pdf")
             if os.path.exists(output_pdf):
                 print(f"Skipping {output_pdf} as it already exists")
             c, x_pos, scaled_width = create_canvas(output_pdf)
@@ -231,20 +248,7 @@ def create_pdf_from_images(script_dir, titles, size=A4, batch=100, include_video
         if page_num % 10 == 0:
             print(f"Processing image {day_num}/{len(image_files)}")
 
-        draw_header(c, day_num, titles, x_pos, page_height, page_width)
-        image_path = os.path.join(image_dir, image_file)
-        c.drawImage(image_path,
-                   x_pos,  # center horizontally
-                   page_height - scaled_width - 70,  # position below header
-                   width=scaled_width, 
-                   height=scaled_width)
-        try:
-            pixel_counts = count_pixels(image_path, titles.get(day_num, {}).get('palette', []))
-            draw_description(c, titles, day_num, pixel_counts, x_pos, page_width, first_line_y=(page_height - scaled_width - 90))
-        except Exception as e:
-            print(f"Error processing image {day_num}: {e}")
-        draw_video_footer_lines(c, page_width, day_num)
-        c.showPage()
+        create_image_page(c, page_width, page_height, image_file, scaled_width, x_pos, titles, day_num, image_dir)
         if include_video:
             create_video_page(c, script_dir, page_width, page_height, image_file, scaled_width, x_pos, os.path.join(script_dir, "video_images"), titles)
 
@@ -257,7 +261,7 @@ def create_cover(script_dir, size, image_files):
     print("Creating PDF cover...")
     img_dir = os.path.join(script_dir, "images")
     pdf_dir = os.path.join(script_dir, "pdf")
-    output_pdf = os.path.join(pdf_dir, "basepaint_archive_000_cover.pdf")
+    output_pdf = os.path.join(pdf_dir, "basepaint_archive_0000_cover.pdf")
     page_width, page_height = size
     c, x_pos, _ = create_canvas(output_pdf)
 
@@ -292,6 +296,3 @@ def create_pdf(batch_size=100, add_cover=True, include_video=False):
             image_files=image_files,
         )
     print("Finish creating PDF.")
-
-if __name__ == "__main__":
-    create_pdf()  # Call the function to execute it immediately

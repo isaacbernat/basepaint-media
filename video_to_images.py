@@ -17,10 +17,13 @@ def extract_images_from_video(video_path, number_of_intervals=12):
 
         # Extract images at specified timestamps
         for timestamp in timestamps:
-            video_capture.set(cv2.CAP_PROP_POS_MSEC, (timestamp - 0.1) * 1000)
-            success, frame = video_capture.read()
             index = timestamps.index(timestamp)
             filename = os.path.join(output_dir, f'{os.path.basename(video_path).split(".")[0]}_{index:03d}.jpg')
+            if os.path.exists(filename):
+                print(f"Skipping {filename} at this time point, since it already exists.")
+                break
+            video_capture.set(cv2.CAP_PROP_POS_MSEC, (timestamp - 0.1) * 1000)
+            success, frame = video_capture.read()
             if success:
                 cv2.imwrite(filename, frame)
             else:
