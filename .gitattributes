@@ -3,4 +3,3 @@ pdf/basepaint_archive_0101_to_0200_with_WIP.pdf filter=lfs diff=lfs merge=lfs -t
 pdf/basepaint_archive_0201_to_0300_with_WIP.pdf filter=lfs diff=lfs merge=lfs -text
 pdf/basepaint_archive_0301_to_0400_with_WIP.pdf filter=lfs diff=lfs merge=lfs -text
 pdf/basepaint_archive_0401_to_0500_with_WIP.pdf filter=lfs diff=lfs merge=lfs -text
-pdf/basepaint_archive_0501_to_0600_with_WIP.pdf filter=lfs diff=lfs merge=lfs -text

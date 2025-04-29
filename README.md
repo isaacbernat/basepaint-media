@@ -11,7 +11,6 @@ The archive is available in PDF form here:
 - [Artworks from 401 to 500 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0401_to_0500.pdf)
 - [Artworks from 501 to 600 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0501_to_0600.pdf)
 
-
 ## Extended PDF edition
 An extended PDF version is available, with twice as many pages as the Standard Edition. Every other page includes 12 thumbnails from the 24 hour creation process of each basepaint artwork. A sample follows:
 
@@ -22,7 +21,7 @@ An extended PDF version is available, with twice as many pages as the Standard E
 - [Artworks with WIP from 201 to 300 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0201_to_0300_with_WIP.pdf)
 - [Artworks with WIP from 301 to 400 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0301_to_0400_with_WIP.pdf)
 - [Artworks with WIP from 401 to 500 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0401_to_0500_with_WIP.pdf)
-- [Artworks with WIP from 501 to 600 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0501_to_0600_with_WIP.pdf)
+- _"Artworks with WIP from 501"_ PDF and beyond are unavailable. It would exceed GitHub's git lfs quota for free repositories. If you are interested, you'll need to clone this repo and generate them on your own.
 
 ## PDF Cover
 There's a custom made cover that is suitable for both PDF editions. It contains useful statistics on most popular colours
