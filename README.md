@@ -31,8 +31,8 @@ There's a custom made cover that is suitable for both PDF editions. It contains 
 - [Cover for artworks and stats till 500](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0000_cover.pdf)
 
 # Howto
-1. Clone the repository: `git clone git@github.com:isaacbernat/basepaint.git`
-2. Move into the newly created directory: `cd basepaint`
+1. Clone the repository: `git clone git@github.com:isaacbernat/basepaint-media.git` (in a terminal)
+2. Move into the newly created directory: `cd basepaint-media`
 3. [Get python](https://www.python.org/downloads/) and install dependencies:
     ```python
     python3 -m venv venv
@@ -46,6 +46,8 @@ There's a custom made cover that is suitable for both PDF editions. It contains 
     - `metadata.csv`: csv file containing metadata for each image.
     - `videos/`: directory containing the videos in mp4 format. They condense the 24h process of creating the image.
     - `video_images/`: directory containing images in jpg format extracted from videos. Needed for the mosaic of Work In Progress pages that accompany each image in the pdf version.
+5. To create the **cover** (`-c`) and/or the **extended PDFs** with video previews (`-v`) use the appropriate parameters.
+    - E.g. `python3 create_archive.py -c -v`
 
 # About the Archive
 This archive is a non-commercial, community-driven project intended for educational and historical purposes. It is **not** officially endorsed by the BasePaint team. Every effort has been made to respect the collaborative nature of BasePaint and the potential copyrights of individual creators.
