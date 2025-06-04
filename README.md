@@ -21,14 +21,67 @@ An extended PDF version is available, with twice as many pages as the Standard E
 - [Artworks with WIP from 201 to 300 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0201_to_0300_with_WIP.pdf)
 - [Artworks with WIP from 301 to 400 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0301_to_0400_with_WIP.pdf)
 - [Artworks with WIP from 401 to 500 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0401_to_0500_with_WIP.pdf)
-- _"Artworks with WIP from 501"_ PDF and beyond are unavailable. It would exceed GitHub's git lfs quota for free repositories. If you are interested, you'll need to clone this repo and generate them on your own.
+- _"Artworks with WIP from 501"_ PDF and beyond are unavailable. It would exceed GitHub's git lfs quota for free repositories. If you are interested, you'll need to clone this repo (or preferably [basepaint-media](https://github.com/isaacbernat/basepaint-media)) and generate them on your own.
+
+## Descriptive PDF edition
+This edition uses one page per artwork, and one line per element with the following format `(X,Y) **Element**: Description`. X and Y represent the coordinates of the element within the image, with (0,0) being the top left corner and (100,100) the bottom right. X is the horizontal coordinate and Y the vertical one.
+
+The remaining blank space (in case there are not enough elements to fill the whole page) showcases a scaled down version of the original work with graded X and Y axis grids to help the reader locate the elements.
+
+The description, location and meaning of each ((ir)relevant) artwork element are provided by Google's latest Gemini Generative AI freely available through API calls. It's a handy reference for those memes one may not be familiar with at first glance. Nevertheless, it's far from perfect.
+
+### Sample
+Here is the depiction of the previous finished artwork as an example, where I highlighted with magenta numbers the elements that were not successfully identified by the AI, yet are notable:
+
+![Descriptive example](https://github.com/isaacbernat/basepaint-media/blob/main/descriptive_example.png)
+
+- 1 **Gastly**: Pokémon #0092.
+- 2 **Casper**: ghost from a 1995 movie.
+- 3 **Meme from The Sixth Sense**: (1999 movie), depicting the protagonist scared covered with a blanket.
+- 4 **Skeletor**: supervillain from 1980s franchise He-Man and the Masters of the Universe.
+- 5 **Guy Fawkes mask**: (aka Anonymous mask), a symbol of protest and rebellion.
+- 6 **Tombstone 272**: depicting the number of the artwork.
+- 7 **Anarchy symbol**: approx. since 1970s (AI thinks it's a number 4...)
+
+#### Latest AI description of 272 (gemini-2.5-flash-preview-04-17)
+- (76,39) **Skeletor**: Prominent skeletal figure in hood holding a staff, referencing the Masters of the Universe villain."
+- (27,74) **He-Man's Arm**: Muscular arm holding a staff or sword piece, referencing the Masters of the Universe hero, opponent of Skeletor."
+- (50,33) **Necromancer Figure**: Central skeletal figure wearing a wide-brimmed hat, likely the titular necromancer."
+- (23,30) **Large Skull**: A large, detailed skull facing left."
+- (40,70) **Dancing Skeleton**: A small skeleton figure with arms raised, referencing the ""Spooky Scary Skeletons"" or dancing skeleton memes."
+- (85,20) **Moth near Lamp**: A large moth-like creature hovering near a glowing circle, referencing the Moth and Lamp internet meme."
+- (75,58) **Hooded Figure**: A skeletal figure wearing a hood, resembling a Grim Reaper or other death personification."
+- (65,45) **Glowing Eye**: A single large, glowing eye, a common spooky trope, possibly referencing Sauron's eye from Lord of the Rings."
+- (45,48) **Creepy Laugh Face**: A face with a wide, unsettling smile, referencing the Creepy Laugh internet meme."
+- (14,76) **Distressed Dude**: A face with a look of discomfort or distress, often used in reaction internet memes."
+- (50,50) **Pentagram**: A five-pointed star symbol, often associated with occult practices like necromancy."
+- (10,55) **""E"" Meme**: The blocky letter ""E"", a known internet meme derived from Markiplier's Lordquaad E meme."
+- (90,10) **Ghost**: A simple sheet ghost shape, a common spooky element."
+- (85,85) **Small Skull**: A smaller, distinct skull in the lower right corner."
+- (20,50) **Small Skull**: A smaller, distinct skull on the left side below the large skull."
+- (50,5) **Background Stars**: Small star shapes in the dark background sky."
+
+#### Limitations
+There is only 1-line of text per element. This severe limitation, along with superfluous words (e.g. "small", "large", "prominent") limits the information provided. Therefore, feel free to contribute and improve them and/or the prompt/model to generate them https://github.com/isaacbernat/basepaint/issues/8
+
+Also, the descriptions in this archive may be provided by AIs and/or not be necessarily reviewed. Therefore they may contain errors, be incomplete and ultimately the responsibility one may be held accountable for is rather limited.
+
+### PDF links
+The descriptive PDF versions are available in PDF form there:
+
+- [Artwork descriptions from 001 to 100 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0001_to_0100_descriptive.pdf)
+- [Artwork descriptions from 101 to 200 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0101_to_0200_descriptive.pdf)
+- [Artwork descriptions from 201 to 300 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0201_to_0300_descriptive.pdf)
+- [Artwork descriptions from 301 to 400 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0301_to_0400_descriptive.pdf)
+- [Artwork descriptions from 401 to 500 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0401_to_0500_descriptive.pdf)
+- [Artwork descriptions from 501 to 600 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0501_to_0600_descriptive.pdf)
 
 ## PDF Cover
 There's a custom made cover that is suitable for both PDF editions. It contains useful statistics on most popular colours
 
 [![Cover preview](https://github.com/isaacbernat/basepaint-media/blob/main/preview.png)](https://github.com/isaacbernat/basepaint-media/blob/main/basepaint_archive_0000_cover.pdf)
 
-- [Cover for artworks and stats till 500](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0000_cover.pdf)
+- [Cover for artworks and stats till 600](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0000_cover.pdf)
 
 # Howto
 1. Clone the repository: `git clone git@github.com:isaacbernat/basepaint-media.git` (in a terminal)
@@ -46,10 +99,13 @@ There's a custom made cover that is suitable for both PDF editions. It contains 
     - `metadata.csv`: csv file containing metadata for each image.
     - `videos/`: directory containing the videos in mp4 format. They condense the 24h process of creating the image.
     - `video_images/`: directory containing images in jpg format extracted from videos. Needed for the mosaic of Work In Progress pages that accompany each image in the pdf version.
-5. To create the **cover** (`-c`) and/or the **extended PDFs** with video previews (`-v`) use the appropriate parameters.
-    - E.g. `python3 create_archive.py -c -v`
+    - `description.csv`: csv file containing the description of each element for all the images.
+    - `reduced_images/`: directory containing the reduced images in png format. Used to generate the descriptions.
 
-# About the Archive
+5. To create the **cover** (`-c`) and/or the **extended PDFs** with video previews (`-v`) and/or the **descriptions** (`-d`) (with indexes `-di`) use the appropriate parameters.
+    - E.g. `python3 create_archive.py -c -v -d -di`
+
+# About the archive
 This archive is a non-commercial, community-driven project intended for educational and historical purposes. It is **not** officially endorsed by the BasePaint team. Every effort has been made to respect the collaborative nature of BasePaint and the potential copyrights of individual creators.
 
 ## Why this repo?
