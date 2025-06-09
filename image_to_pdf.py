@@ -11,22 +11,17 @@ from PIL import Image
 
 from video_to_images import extract_images_from_video
 from config import ARCHIVE_VERSION
+from image_descriptions import create_description_page
+from fetch_metadata import load_titles, draw_header
 
 
-def load_titles(csv_path):
-    titles = {}
+def load_descriptions(csv_path):
+    descriptions = defaultdict(list)
     with open(csv_path, 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for row in reader:
-            titles[int(row['NUM'])] = {
-                'title': row['TITLE'],
-                'palette': [tuple(map(int, color.strip().split(','))) for color in row['PALETTE'].split(';')],
-                'minted': row.get('MINTED', 0),
-                'artists': row.get('ARTISTS', 0),
-                'proposer': row.get('PROPOSER', ''),
-                'MINT_DATE': row.get('MINT_DATE', ''),
-            }
-    return titles
+            descriptions[int(row['filename'])].append(row['analysis'])
+    return descriptions
 
 
 def count_pixels(image_path, palette):
@@ -54,24 +49,6 @@ def draw_text(canvas, text_italic, text_normal, x, y, italic_offset, x_offset, p
     else:
         total_italic_offset = page_width - canvas.stringWidth(text_normal) - x
     canvas.drawString(total_italic_offset, y, text_normal)
-
-
-def draw_header(canvas, day_num, titles, x_pos, page_height, page_width):
-    title_data = titles.get(day_num, {'title': '', 'palette': []})
-    title = f"Day {day_num}: {title_data['title']}"
-    canvas.setFont("MekSans-Regular", 24)
-    canvas.drawString(x_pos, page_height - 55, title)
-    
-    square_size = canvas.stringWidth("o", "MekSans-Regular", 24)
-    square_spacing = square_size * 1.2  # Add some spacing between squares
-    palette = title_data['palette']
-    total_palette_width = len(palette) * square_spacing
-    start_x = page_width - x_pos - total_palette_width
-    
-    for i, color in enumerate(palette):
-        canvas.setFillColorRGB(color[0]/255, color[1]/255, color[2]/255)
-        canvas.rect(start_x + (i * square_spacing), page_height - 50 - square_size/2, 10, 10, fill=1, stroke=1)  # stroke=1 to draw the border
-    canvas.setFillColorRGB(0, 0, 0)  # Reset fill color to black for subsequent text
 
 
 def draw_footer_line(c, footer_y, page_width, prefix_text, url_text):
@@ -228,11 +205,14 @@ def create_image_page(c, page_width, page_height, image_file, scaled_width, x_po
     c.showPage()
 
 
-def create_pdf_from_images(script_dir, titles, size=A4, batch=100, include_video=False):
+def create_pdf_from_images(script_dir, titles, size=A4, batch=100, include_video=False, include_description=False, exclude_images=False, include_description_image=False, include_description_image_grid=False):
     image_dir = os.path.join(script_dir, "images")
     image_files = sorted([f for f in os.listdir(image_dir) if f.endswith('.jpg')])
     pdf_dir = os.path.join(script_dir, "pdf")
     os.makedirs(pdf_dir, exist_ok=True)  # Create pdf directory if needed
+    descriptions = {}
+    if include_description:
+        descriptions = load_descriptions(os.path.join(script_dir, "description.csv"))
 
     page_width, page_height = size
     for page_num, image_file in enumerate(image_files, 1):  # Process each image
@@ -248,9 +228,12 @@ def create_pdf_from_images(script_dir, titles, size=A4, batch=100, include_video
         if page_num % 10 == 0:
             print(f"Processing image {day_num}/{len(image_files)}")
 
-        create_image_page(c, page_width, page_height, image_file, scaled_width, x_pos, titles, day_num, image_dir)
+        if not exclude_images:  # double negation may be confusing... but imho it's clearer from the command line point of view
+            create_image_page(c, page_width, page_height, image_file, scaled_width, x_pos, titles, day_num, image_dir)
         if include_video:
             create_video_page(c, script_dir, page_width, page_height, image_file, scaled_width, x_pos, os.path.join(script_dir, "video_images"), titles)
+        if include_description:
+            create_description_page(c, script_dir, page_width, page_height, x_pos, day_num, descriptions, titles, include_description_image, include_description_image_grid)
 
         if page_num % batch == 0:
             c.save()
@@ -282,11 +265,11 @@ def create_cover(script_dir, size, image_files):
     c.save()
 
 
-def create_pdf(batch_size=100, add_cover=True, include_video=False):
+def create_pdf(batch_size=100, add_cover=True, include_video=False, include_description=False, exclude_images=False, include_description_image=False, include_description_image_grid=False):
     script_dir = os.path.dirname(os.path.abspath(__file__))
     titles = load_titles('metadata.csv')
     load_fonts()
-    create_pdf_from_images(script_dir, titles, size=A4, batch=batch_size, include_video=include_video)
+    create_pdf_from_images(script_dir, titles, size=A4, batch=batch_size, include_video=include_video, include_description=include_description, exclude_images=exclude_images, include_description_image=include_description_image, include_description_image_grid=include_description_image_grid)
     if add_cover:
         img_dir = os.path.join(script_dir, "images")
         image_files = sorted([f for f in os.listdir(img_dir) if f.endswith('.jpg')])

@@ -71,3 +71,37 @@ def create_metadata_csv(max_day: int):
                 print(f"Error processing Day {day}: {str(e)}")
     print(f"Skipped days (already in CSV): {skipped_days}")
     print("Finished creating metadata csv.")
+
+
+def load_titles(csv_path):
+    titles = {}
+    with open(csv_path, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            titles[int(row['NUM'])] = {
+                'title': row['TITLE'],
+                'palette': [tuple(map(int, color.strip().split(','))) for color in row['PALETTE'].split(';')],
+                'minted': row.get('MINTED', 0),
+                'artists': row.get('ARTISTS', 0),
+                'proposer': row.get('PROPOSER', ''),
+                'MINT_DATE': row.get('MINT_DATE', ''),
+            }
+    return titles
+
+
+def draw_header(canvas, day_num, titles, x_pos, page_height, page_width):
+    title_data = titles.get(day_num, {'title': '', 'palette': []})
+    title = f"Day {day_num}: {title_data['title']}"
+    canvas.setFont("MekSans-Regular", 24)
+    canvas.drawString(x_pos, page_height - 55, title)
+    
+    square_size = canvas.stringWidth("o", "MekSans-Regular", 24)
+    square_spacing = square_size * 1.2  # Add some spacing between squares
+    palette = title_data['palette']
+    total_palette_width = len(palette) * square_spacing
+    start_x = page_width - x_pos - total_palette_width
+    
+    for i, color in enumerate(palette):
+        canvas.setFillColorRGB(color[0]/255, color[1]/255, color[2]/255)
+        canvas.rect(start_x + (i * square_spacing), page_height - 50 - square_size/2, 10, 10, fill=1, stroke=1)  # stroke=1 to draw the border
+    canvas.setFillColorRGB(0, 0, 0)  # Reset fill color to black for subsequent text
