@@ -81,7 +81,7 @@ There's a custom made cover that is suitable for both PDF editions. It contains 
 
 [![Cover preview](https://github.com/isaacbernat/basepaint-media/blob/main/preview.png)](https://github.com/isaacbernat/basepaint-media/blob/main/basepaint_archive_0000_cover.pdf)
 
-- [Cover for artworks and stats till 600](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0000_cover.pdf)
+- [Cover for artworks and stats till 700](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0000_cover.pdf)
 
 # Howto
 1. Clone the repository: `git clone git@github.com:isaacbernat/basepaint-media.git` (in a terminal)
