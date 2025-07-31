@@ -10,6 +10,7 @@ The archive is available in PDF form here:
 - [Artworks from 301 to 400 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0301_to_0400.pdf)
 - [Artworks from 401 to 500 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0401_to_0500.pdf)
 - [Artworks from 501 to 600 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0501_to_0600.pdf)
+- [Artworks from 601 to 700 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0601_to_0700.pdf)
 
 ## Extended PDF edition
 An extended PDF version is available, with twice as many pages as the Standard Edition. Every other page includes 12 thumbnails from the 24 hour creation process of each basepaint artwork. A sample follows:
@@ -81,7 +82,7 @@ There's a custom made cover that is suitable for both PDF editions. It contains 
 
 [![Cover preview](https://github.com/isaacbernat/basepaint-media/blob/main/preview.png)](https://github.com/isaacbernat/basepaint-media/blob/main/basepaint_archive_0000_cover.pdf)
 
-- [Cover for artworks and stats till 600](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0000_cover.pdf)
+- [Cover for artworks and stats till 700](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0000_cover.pdf)
 
 # Howto
 1. Clone the repository: `git clone git@github.com:isaacbernat/basepaint-media.git` (in a terminal)

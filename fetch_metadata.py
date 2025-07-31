@@ -5,7 +5,7 @@ from typing import Dict, List, Any
 
 
 def fetch_day_data(day: int) -> Dict[str, Any]:
-    url = f'https://basepaint.xyz/api/art/{hex(day)[2:]}'
+    url = f'https://basepaint.xyz/api/art/{day}'
     response = requests.get(url)
     response.raise_for_status()
     return response.json()
