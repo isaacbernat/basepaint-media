@@ -29,7 +29,7 @@ This edition uses one page per artwork, and one line per element with the follow
 
 The remaining blank space (in case there are not enough elements to fill the whole page) showcases a scaled down version of the original work with graded X and Y axis grids to help the reader locate the elements.
 
-The description, location and meaning of each ((ir)relevant) artwork element are provided by Google's latest Gemini Generative AI freely available through API calls. It's a handy reference for those memes one may not be familiar with at first glance. Nevertheless, it's far from perfect.
+The description, location and meaning of each ((ir)relevant) artwork element are provided by Google's **latest** Gemini Generative AI/LLM **freely available** through API calls. It's a handy reference for those memes one may not be familiar with at first glance. Nevertheless, it's far from perfect.
 
 ### Sample
 Here is the depiction of the previous finished artwork as an example, where I highlighted with magenta numbers the elements that were not successfully identified by the AI, yet are notable:
@@ -44,7 +44,26 @@ Here is the depiction of the previous finished artwork as an example, where I hi
 - 6 **Tombstone 272**: depicting the number of the artwork.
 - 7 **Anarchy symbol**: approx. since 1970s (AI thinks it's a number 4...)
 
-#### Latest AI description of 272 (gemini-2.5-flash-preview-04-17)
+#### Latest (as of 2025-08-02) AI description of 272 (gemini-2.5-pro)
+- (50,35) **The Necromancer**: A large central skeleton wearing a wide-brimmed hat and robes, holding a skull and bearing a pentagram. This is the main figure of the composition."
+- (20,25) **Giant Skull**: A very large skull in the upper left, a common horror and fantasy motif."
+- (48,80) **Resurrected Skeleton**: A skeleton at the bottom center with arms raised, surrounded by magical energy, as if being brought back to life."
+- (75,55) **Grim Reaper**: A skeletal figure in a dark hood, reminiscent of the classic personification of Death."
+- (50,48) **Pentagram**: An inverted five-pointed star on the main necromancer's chest, a symbol commonly associated with occultism and magic."
+- (45,40) **Jason Voorhees**: A skull wearing a hockey mask, a clear reference to the killer from the 'Friday the 13th' horror movie franchise."
+- (65,45) **Winged Eyeball**: A monstrous flying eyeball, a classic fantasy monster trope similar to a Beholder from 'Dungeons & Dragons'."
+- (38,38) **Pumpkin King**: A round, carved head with stitched eyes, resembling the Pumpkin King form of Jack Skellington from 'The Nightmare Before Christmas'."
+- (80,15) **Spooky**: A small, cute ghost in the top right, a reference to the main character from the indie game 'Spooky's Jumpscare Mansion'."
+- (90,20) **Ghostface**: A distorted, screaming face resembling the mask worn by the killer in the 'Scream' horror movie franchise."
+- (92,40) **Gengar**: A shadowy, grinning creature on the right, which heavily resembles the Pokémon Gengar."
+- (10,48) **Necronomicon Ex-Mortis**: A book with a monstrous face on its cover, a reference to the Book of the Dead from the 'Evil Dead' franchise."
+- (15,55) **ReDead**: A zombie-like figure with a mask-like face, resembling a ReDead from 'The Legend of Zelda**: Ocarina of Time'."
+- (28,50) **Lost Soul**: A screaming skull with round glowing eyes, resembling a Lost Soul enemy from the 'DOOM' video game series."
+- (65,85) **Doomer Girl**: A female character with black hair and a choker, a depiction of the 'Doomer Girl' Wojak internet meme."
+- (10,80) **E Meme**: A distorted letter 'E' in the bottom left, a reference to the surreal deep-fried internet meme featuring Markiplier's face on Lord Farquaad's body."
+- (88,90) **Sans**: A short, smiling skeleton in the bottom right corner, a reference to the character Sans from the video game 'Undertale'."
+
+#### Previous AI description of 272 (gemini-2.5-flash-preview-04-17)
 - (76,39) **Skeletor**: Prominent skeletal figure in hood holding a staff, referencing the Masters of the Universe villain."
 - (27,74) **He-Man's Arm**: Muscular arm holding a staff or sword piece, referencing the Masters of the Universe hero, opponent of Skeletor."
 - (50,33) **Necromancer Figure**: Central skeletal figure wearing a wide-brimmed hat, likely the titular necromancer."
@@ -70,12 +89,17 @@ Also, the descriptions in this archive may be provided by AIs and/or not be nece
 ### PDF links
 The descriptive PDF versions are available in PDF form there:
 
+001-600 use **gemini-2.5-flash-preview-04-17**
 - [Artwork descriptions from 001 to 100 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0001_to_0100_descriptive.pdf)
 - [Artwork descriptions from 101 to 200 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0101_to_0200_descriptive.pdf)
 - [Artwork descriptions from 201 to 300 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0201_to_0300_descriptive.pdf)
 - [Artwork descriptions from 301 to 400 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0301_to_0400_descriptive.pdf)
 - [Artwork descriptions from 401 to 500 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0401_to_0500_descriptive.pdf)
 - [Artwork descriptions from 501 to 600 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0501_to_0600_descriptive.pdf)
+
+601-700 use **gemini-2.5-pro** (free tier from 2025-08-01)
+- [Artwork descriptions from 601 to 700 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0601_to_0700_descriptive.pdf)
+
 
 ## PDF Cover
 There's a custom made cover that is suitable for both PDF editions. It contains useful statistics on most popular colours
