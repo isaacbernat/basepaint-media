@@ -11,6 +11,7 @@ The archive is available in PDF form here:
 - [Artworks from 401 to 500 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0401_to_0500.pdf)
 - [Artworks from 501 to 600 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0501_to_0600.pdf)
 - [Artworks from 601 to 700 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0601_to_0700.pdf)
+- [Artworks from 701 to 800 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0701_to_0800.pdf)
 
 ## Extended PDF edition
 An extended PDF version is available, with twice as many pages as the Standard Edition. Every other page includes 12 thumbnails from the 24 hour creation process of each basepaint artwork. A sample follows:
@@ -22,7 +23,7 @@ An extended PDF version is available, with twice as many pages as the Standard E
 - [Artworks with WIP from 201 to 300 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0201_to_0300_with_WIP.pdf)
 - [Artworks with WIP from 301 to 400 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0301_to_0400_with_WIP.pdf)
 - [Artworks with WIP from 401 to 500 in PDF](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0401_to_0500_with_WIP.pdf)
-- _"Artworks with WIP from 501"_ PDF and beyond are unavailable. It would exceed GitHub's git lfs quota for free repositories. If you are interested, you'll need to clone this repo (or preferably [basepaint-media](https://github.com/isaacbernat/basepaint-media)) and generate them on your own.
+- _"Artworks with WIP from 501"_ PDF and beyond are unavailable. It would exceed GitHub's git lfs quota for free repositories. If you are interested, you'll need to clone this repo and generate them on your own.
 
 ## Descriptive PDF edition
 This edition uses one page per artwork, and one line per element with the following format `(X,Y) **Element**: Description`. X and Y represent the coordinates of the element within the image, with (0,0) being the top left corner and (100,100) the bottom right. X is the horizontal coordinate and Y the vertical one.
@@ -106,7 +107,7 @@ There's a custom made cover that is suitable for both PDF editions. It contains 
 
 [![Cover preview](https://github.com/isaacbernat/basepaint-media/blob/main/preview.png)](https://github.com/isaacbernat/basepaint-media/blob/main/basepaint_archive_0000_cover.pdf)
 
-- [Cover for artworks and stats till 700](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0000_cover.pdf)
+- [Cover for artworks and stats till 800](https://github.com/isaacbernat/basepaint-media/blob/main/pdf/basepaint_archive_0000_cover.pdf)
 
 # Howto
 1. Clone the repository: `git clone git@github.com:isaacbernat/basepaint-media.git` (in a terminal)
