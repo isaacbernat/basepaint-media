@@ -3,4 +3,6 @@ Pillow
 requests
 beautifulsoup4  # needed for enrich_metadata.py
 opencv-python  # needed for video_to_images.py
-google-generativeai  # needed for image_descriptions.py
+google-genai  # needed for image_descriptions.py
+pydantic  # needed for image_descriptions.py
+tenacity  # needed for image_descriptions.py
